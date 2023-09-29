@@ -48,6 +48,10 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public ResponseModel updateUser(UpdateUserModel updateUserModel){
+        return null;
+    }
+    @Override
     public ResponseModel setOtp(String phone) {
 //        Get generated Otp
         int otpValue = generateOtp();

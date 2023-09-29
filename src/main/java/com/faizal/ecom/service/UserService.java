@@ -6,6 +6,7 @@ public interface UserService {
 
     ResponseModel addUser(UserRegistrationModel user);
 
+    ResponseModel updateUser(UpdateUserModel updateUserModel);
     ResponseModel loginUser(UserLoginModel user);
 
     ResponseModel setOtp(String phone);

@@ -51,4 +51,9 @@ public class OnboardController {
     public ResponseModel updateUser(@RequestBody UpdateUserModel updateUserModel){
         return userService.updateUser(updateUserModel);
     }
+
+    @PostMapping("/addaddress")
+    public ResponseModel addAddress(@RequestBody AddressOperationModel addressOperationModel){
+        return userService.addAddress(addressOperationModel);
+    }
 }

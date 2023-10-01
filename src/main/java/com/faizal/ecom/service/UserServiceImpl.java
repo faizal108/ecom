@@ -2,6 +2,7 @@ package com.faizal.ecom.service;
 
 import com.faizal.ecom.dao.PasswordDao;
 import com.faizal.ecom.dao.UserDao;
+import com.faizal.ecom.dao.repos.AddressDao;
 import com.faizal.ecom.entity.Status;
 import com.faizal.ecom.model.*;
 import org.slf4j.Logger;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private PasswordDao passwordDao;
 
+    @Autowired
+    private AddressDao addressDao;
+
     @Override
     public ResponseModel addUser(UserRegistrationModel userModel) {
         try {
@@ -46,7 +50,6 @@ public class UserServiceImpl implements UserService{
             return CommanUtil.prepareErrorResponse(Message.REGISTER_FAIL, null);
         }
     }
-
     @Override
     public ResponseModel updateUser(UpdateUserModel updateUserModel){
         User user = userDao.findById(updateUserModel.getId());
@@ -58,6 +61,18 @@ public class UserServiceImpl implements UserService{
         }
         return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL, null);
     }
+
+    /*-------Address Services--------------------*/
+    @Override
+    public ResponseModel addAddress(AddressOperationModel addressOperationModel){
+        User user  = userDao.findById(addressOperationModel.getId());
+        if(user != null){
+            addressDao.addAddress(new Address(addressOperationModel.getAddress(), user));
+            return CommanUtil.prepareOkResponse(Message.UPDATE_SUCCESS, null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL,null);
+    }
+    /*-------Verification and Security---------- */
     @Override
     public ResponseModel setOtp(String phone) {
 //        Get generated Otp

@@ -5,8 +5,8 @@ import com.faizal.ecom.model.*;
 public interface UserService {
 
     ResponseModel addUser(UserRegistrationModel user);
-
     ResponseModel updateUser(UpdateUserModel updateUserModel);
+    ResponseModel addAddress(AddressOperationModel addressOperationModel);
     ResponseModel loginUser(UserLoginModel user);
 
     ResponseModel setOtp(String phone);

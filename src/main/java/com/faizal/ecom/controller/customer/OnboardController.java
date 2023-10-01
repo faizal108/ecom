@@ -46,4 +46,9 @@ public class OnboardController {
     public ResponseModel changePassword(@RequestBody ChangePasswordModel changePasswordModel){
         return userService.changePassword(changePasswordModel);
     }
+
+    @PostMapping("/updateuser")
+    public ResponseModel updateUser(@RequestBody UpdateUserModel updateUserModel){
+        return userService.updateUser(updateUserModel);
+    }
 }

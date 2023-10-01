@@ -49,7 +49,14 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public ResponseModel updateUser(UpdateUserModel updateUserModel){
-        return null;
+        User user = userDao.findById(updateUserModel.getId());
+        if(user != null){
+            user.setFirstName(updateUserModel.getFirstName());
+            user.setLastName(updateUserModel.getLastName());
+            userDao.updateUser(user);
+            return CommanUtil.prepareOkResponse(Message.UPDATE_SUCCESS, null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL, null);
     }
     @Override
     public ResponseModel setOtp(String phone) {

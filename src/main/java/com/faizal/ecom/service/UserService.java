@@ -20,4 +20,6 @@ public interface UserService {
     ResponseModel deleteAddress(String id);
 
     ResponseModel updateAddress(AddressOperationModel addressOperationModel);
+
+    ResponseModel activeAddressById(String id);
 }

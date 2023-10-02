@@ -40,6 +40,11 @@ public class OnboardController {
     public ResponseModel updateAddress(@RequestBody AddressOperationModel addressOperationModel){
         return userService.updateAddress(addressOperationModel);
     }
+    @GetMapping("/activeaddress/{id}")
+    public ResponseModel makeActiveAddress(@PathVariable String id){
+        return userService.activeAddressById(id);
+    }
+
 
     /*----------Security & Authentication--------------*/
     @GetMapping("/login")

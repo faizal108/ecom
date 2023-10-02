@@ -2,7 +2,7 @@ package com.faizal.ecom.service;
 
 import com.faizal.ecom.dao.PasswordDao;
 import com.faizal.ecom.dao.UserDao;
-import com.faizal.ecom.dao.repos.AddressDao;
+import com.faizal.ecom.dao.AddressDao;
 import com.faizal.ecom.entity.Status;
 import com.faizal.ecom.model.*;
 import org.slf4j.Logger;
@@ -95,6 +95,16 @@ public class UserServiceImpl implements UserService{
             return CommanUtil.prepareOkResponse(Message.UPDATE_SUCCESS,null);
         }
         return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL,null);
+    }
+
+    @Override
+    public ResponseModel activeAddressById(String id) {
+        Address address = addressDao.findById(id);
+        if(address != null){
+            addressDao.activeAddress(address);
+            return CommanUtil.prepareOkResponse(Message.UPDATE_SUCCESS, null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL, null);
     }
 
 

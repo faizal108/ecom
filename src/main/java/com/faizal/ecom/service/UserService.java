@@ -16,4 +16,8 @@ public interface UserService {
     ResponseModel forgotPassword(ForgotPassModel forgotPassModel);
 
     ResponseModel changePassword(ChangePasswordModel changePasswordModel);
+
+    ResponseModel deleteAddress(String id);
+
+    ResponseModel updateAddress(AddressOperationModel addressOperationModel);
 }

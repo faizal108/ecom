@@ -22,6 +22,26 @@ public class OnboardController {
         return userService.addUser(user);
     }
 
+    @PutMapping("/updateuser")
+    public ResponseModel updateUser(@RequestBody UpdateUserModel updateUserModel){
+        return userService.updateUser(updateUserModel);
+    }
+
+    /*-------------Address---------------*/
+    @PostMapping("/addaddress")
+    public ResponseModel addAddress(@RequestBody AddressOperationModel addressOperationModel){
+        return userService.addAddress(addressOperationModel);
+    }
+    @DeleteMapping("/deleteaddress/{id}")
+    public ResponseModel deleteAddress(@PathVariable String id){
+        return userService.deleteAddress(id);
+    }
+    @PutMapping("/updateaddress")
+    public ResponseModel updateAddress(@RequestBody AddressOperationModel addressOperationModel){
+        return userService.updateAddress(addressOperationModel);
+    }
+
+    /*----------Security & Authentication--------------*/
     @GetMapping("/login")
     public ResponseModel loginUser(@RequestBody UserLoginModel user){
         return userService.loginUser(user);
@@ -42,18 +62,8 @@ public class OnboardController {
         return userService.forgotPassword(forgotPassModel);
     }
 
-    @PostMapping("/changepassword")
+    @PutMapping("/changepassword")
     public ResponseModel changePassword(@RequestBody ChangePasswordModel changePasswordModel){
         return userService.changePassword(changePasswordModel);
-    }
-
-    @PostMapping("/updateuser")
-    public ResponseModel updateUser(@RequestBody UpdateUserModel updateUserModel){
-        return userService.updateUser(updateUserModel);
-    }
-
-    @PostMapping("/addaddress")
-    public ResponseModel addAddress(@RequestBody AddressOperationModel addressOperationModel){
-        return userService.addAddress(addressOperationModel);
     }
 }

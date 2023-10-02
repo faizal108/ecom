@@ -19,6 +19,24 @@ public class AddressDao {
         addressRepo.save(address);
     }
 
+    public boolean deleteAddressById(String id) {
+        boolean isExist = addressRepo.existsById(id);
+        if(isExist){
+            addressRepo.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Address findById(String id) {
+        return addressRepo.findById(id).orElse(null);
+    }
+
+    public void updateAddress(Address address) {
+        addressRepo.save(address);
+    }
+
     /*-------------Private Section---------------*/
 //
 //    private void manageAddressHistory(User user){

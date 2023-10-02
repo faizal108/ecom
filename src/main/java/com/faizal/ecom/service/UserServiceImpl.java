@@ -72,6 +72,32 @@ public class UserServiceImpl implements UserService{
         }
         return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL,null);
     }
+
+    @Override
+    public ResponseModel deleteAddress(String id) {
+        if(addressDao.deleteAddressById(id)){
+            return CommanUtil.prepareOkResponse(Message.DELETE_SUCCESS,null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.DELETE_FAIL, null);
+    }
+
+    @Override
+    public ResponseModel updateAddress(AddressOperationModel addressOperationModel) {
+        Address address = addressDao.findById(addressOperationModel.getId());
+        if(address != null){
+            address.setCountry(addressOperationModel.getAddress().getCountry());
+            address.setState(addressOperationModel.getAddress().getState());
+            address.setCity(addressOperationModel.getAddress().getCity());
+            address.setStreet(addressOperationModel.getAddress().getStreet());
+            address.setPincode(addressOperationModel.getAddress().getPincode());
+            addressDao.updateAddress(address);
+
+            return CommanUtil.prepareOkResponse(Message.UPDATE_SUCCESS,null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL,null);
+    }
+
+
     /*-------Verification and Security---------- */
     @Override
     public ResponseModel setOtp(String phone) {
@@ -129,6 +155,7 @@ public class UserServiceImpl implements UserService{
             return CommanUtil.prepareErrorResponse(Message.FAIL,null);
         }
     }
+
     @Override
     public ResponseModel loginUser(UserLoginModel userModel) {
         User user =  userDao.findByPhoneAndStatus(userModel.getPhone());

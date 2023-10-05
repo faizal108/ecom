@@ -22,4 +22,8 @@ public interface UserService {
     ResponseModel updateAddress(AddressOperationModel addressOperationModel);
 
     ResponseModel activeAddressById(String id);
+
+    ResponseModel changePhone(ChangePhoneModel changePhoneModel);
+
+    ResponseModel getAllAddress(String userID);
 }

@@ -41,4 +41,8 @@ public class UserDao {
     public User findById(String userId) {
         return userRepo.findById(userId).orElse(null);
     }
+
+    public Boolean userExistById(String id){
+        return userRepo.existsById(id);
+    }
 }

@@ -12,11 +12,14 @@ public class OnboardController {
 
     @Autowired
     private UserService userService;
+
+    /*-------Onboard Service Ping-------*/
     @GetMapping
     public String iAmAlive () {
         return "I Am Alive";
     }
 
+    /*--------------User-----------------*/
     @PostMapping("/register")
     public ResponseModel registerUser(@RequestBody UserRegistrationModel user){
         return userService.addUser(user);
@@ -25,6 +28,11 @@ public class OnboardController {
     @PutMapping("/updateuser")
     public ResponseModel updateUser(@RequestBody UpdateUserModel updateUserModel){
         return userService.updateUser(updateUserModel);
+    }
+
+    @PutMapping("/updatephone")
+    public ResponseModel changePhone(@RequestBody ChangePhoneModel changePhoneModel){
+        return userService.changePhone(changePhoneModel);
     }
 
     /*-------------Address---------------*/
@@ -45,7 +53,10 @@ public class OnboardController {
         return userService.activeAddressById(id);
     }
 
-
+    @GetMapping("/getalladdress/{userID}")
+    public ResponseModel getAllAddress(@PathVariable String userID){
+        return userService.getAllAddress(userID);
+    }
     /*----------Security & Authentication--------------*/
     @GetMapping("/login")
     public ResponseModel loginUser(@RequestBody UserLoginModel user){

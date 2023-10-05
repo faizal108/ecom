@@ -15,6 +15,8 @@ import com.faizal.ecom.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 @Service
@@ -62,6 +64,29 @@ public class UserServiceImpl implements UserService{
         return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL, null);
     }
 
+    @Override
+    public ResponseModel changePhone(ChangePhoneModel changePhoneModel) {
+        User user = userDao.findByPhone(changePhoneModel.getOldPhone());
+        if(user != null && !Objects.equals(changePhoneModel.getOldPhone(), changePhoneModel.getNewPhone())){
+            user.setPhone(changePhoneModel.getNewPhone());
+            userDao.updateUser(user);
+            return CommanUtil.prepareOkResponse(Message.UPDATE_SUCCESS, null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL, null);
+    }
+
+    @Override
+    public ResponseModel getAllAddress(String userID) {
+        User user = userDao.findById(userID);
+
+        if(user != null){
+            List<Address> addressList = user.getAddress();
+            return CommanUtil.prepareOkResponse(Message.SUCCESS,addressList);
+        }
+        return CommanUtil.prepareErrorResponse(Message.FAIL,null);
+    }
+
+
     /*-------Address Services--------------------*/
     @Override
     public ResponseModel addAddress(AddressOperationModel addressOperationModel){
@@ -106,6 +131,7 @@ public class UserServiceImpl implements UserService{
         }
         return CommanUtil.prepareErrorResponse(Message.UPDATE_FAIL, null);
     }
+
 
 
     /*-------Verification and Security---------- */

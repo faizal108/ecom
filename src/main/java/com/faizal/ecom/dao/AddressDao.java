@@ -55,4 +55,8 @@ public class AddressDao {
                     addressRepo.save(address);
                 });
     }
+
+    public List<Address> findAllByUserId(String userID) {
+        return addressRepo.findAllByUser_uid(userID);
+    }
 }

@@ -1,6 +1,7 @@
 package com.faizal.ecom.entity;
 
 import com.faizal.ecom.model.AddressModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Address extends AbstractDomain{
 
     @ManyToOne
     @JoinColumn(name = "fk_user_id")
+    @JsonBackReference
     private User user;
 
     private String country;

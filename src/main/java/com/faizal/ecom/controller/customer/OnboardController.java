@@ -25,38 +25,8 @@ public class OnboardController {
         return userService.addUser(user);
     }
 
-    @PutMapping("/updateuser")
-    public ResponseModel updateUser(@RequestBody UpdateUserModel updateUserModel){
-        return userService.updateUser(updateUserModel);
-    }
 
-    @PutMapping("/updatephone")
-    public ResponseModel changePhone(@RequestBody ChangePhoneModel changePhoneModel){
-        return userService.changePhone(changePhoneModel);
-    }
 
-    /*-------------Address---------------*/
-    @PostMapping("/addaddress")
-    public ResponseModel addAddress(@RequestBody AddressOperationModel addressOperationModel){
-        return userService.addAddress(addressOperationModel);
-    }
-    @DeleteMapping("/deleteaddress/{id}")
-    public ResponseModel deleteAddress(@PathVariable String id){
-        return userService.deleteAddress(id);
-    }
-    @PutMapping("/updateaddress")
-    public ResponseModel updateAddress(@RequestBody AddressOperationModel addressOperationModel){
-        return userService.updateAddress(addressOperationModel);
-    }
-    @GetMapping("/activeaddress/{id}")
-    public ResponseModel makeActiveAddress(@PathVariable String id){
-        return userService.activeAddressById(id);
-    }
-
-    @GetMapping("/getalladdress/{userID}")
-    public ResponseModel getAllAddress(@PathVariable String userID){
-        return userService.getAllAddress(userID);
-    }
     /*----------Security & Authentication--------------*/
     @GetMapping("/login")
     public ResponseModel loginUser(@RequestBody UserLoginModel user){

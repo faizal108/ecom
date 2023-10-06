@@ -15,4 +15,6 @@ public class Message {
 
     public static String SUCCESS = "Success";
     public static String FAIL = "Fail";
+    public static String ADD_SUCCESS = "Adding Success";
+    public static String ADD_FAIL = "Adding Fail";
 }

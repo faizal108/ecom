@@ -1,15 +1,10 @@
 package com.faizal.ecom.service;
 
-import com.faizal.ecom.dao.PasswordDao;
-import com.faizal.ecom.dao.UserDao;
-import com.faizal.ecom.dao.AddressDao;
-import com.faizal.ecom.entity.Status;
+import com.faizal.ecom.dao.*;
+import com.faizal.ecom.entity.*;
 import com.faizal.ecom.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.faizal.ecom.entity.Address;
-import com.faizal.ecom.entity.Password;
-import com.faizal.ecom.entity.User;
 import com.faizal.ecom.util.CommanUtil;
 import com.faizal.ecom.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +23,14 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
     @Autowired
     private PasswordDao passwordDao;
-
     @Autowired
     private AddressDao addressDao;
+    @Autowired
+    private ProductDao productDao;
+    @Autowired
+    private CartDao cartDao;
+    @Autowired
+    private WishListDao wishListDao;
 
     @Override
     public ResponseModel addUser(UserRegistrationModel userModel) {
@@ -208,4 +208,60 @@ public class UserServiceImpl implements UserService{
         Random random = new Random();
         return (100000+random.nextInt(900000));
     }
+
+    /*--------------Product---------------*/
+
+    @Override
+    public ResponseModel addProduct(Product product){
+        productDao.addProduct(product);
+        return CommanUtil.prepareOkResponse(Message.SUCCESS, null);
+    }
+
+    @Override
+    public ResponseModel deleteProduct(String id){
+        if(productDao.isExistById(id)){
+            productDao.deleteProduct(id);
+            return CommanUtil.prepareOkResponse(Message.DELETE_SUCCESS,null);
+        }
+        return CommanUtil.prepareOkResponse(Message.DELETE_FAIL, null);
+    }
+
+
+    /*----------Add To Cart--------------*/
+
+    @Override
+    public ResponseModel addToCart(AddToCartModel addToCartModel) {
+        // get the user by id.
+        User user = userDao.findById(addToCartModel.getUserId());
+
+        // get the product by id.
+        Product product = productDao.findByUserId(addToCartModel.getProductId());
+
+        //check the stock with respect to requested quantity.
+        boolean checkStock = addToCartModel.getQuantity() <= product.getStock();
+
+        if(user != null && product != null && checkStock){
+            cartDao.add(new Cart(user, product, addToCartModel.getQuantity()));
+            return CommanUtil.prepareOkResponse(Message.ADD_SUCCESS, null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.ADD_FAIL, null);
+    }
+
+    /*------------Add To WishList--------------*/
+
+    @Override
+    public ResponseModel addToList(AddToWishListModel addToWishListModel){
+        // get the user by id.
+        User user = userDao.findById(addToWishListModel.getUserId());
+
+        // get the product by id.
+        Product product = productDao.findByUserId(addToWishListModel.getProductId());
+
+        if(user != null && product != null){
+            wishListDao.addToList(new WishList(user,product));
+            return CommanUtil.prepareOkResponse(Message.ADD_SUCCESS, null);
+        }
+        return CommanUtil.prepareErrorResponse(Message.ADD_FAIL, null);
+    }
+
 }

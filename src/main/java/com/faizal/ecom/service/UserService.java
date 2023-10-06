@@ -1,5 +1,6 @@
 package com.faizal.ecom.service;
 
+import com.faizal.ecom.entity.Product;
 import com.faizal.ecom.model.*;
 
 public interface UserService {
@@ -26,4 +27,12 @@ public interface UserService {
     ResponseModel changePhone(ChangePhoneModel changePhoneModel);
 
     ResponseModel getAllAddress(String userID);
+
+    ResponseModel addProduct(Product product);
+
+    ResponseModel deleteProduct(String id);
+
+    ResponseModel addToCart(AddToCartModel addToCartModel);
+
+    ResponseModel addToList(AddToWishListModel addToWishListModel);
 }

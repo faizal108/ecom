@@ -1,10 +1,8 @@
 package com.faizal.ecom.controller.customer;
 
+import com.faizal.ecom.entity.Cart;
 import com.faizal.ecom.entity.Product;
-import com.faizal.ecom.model.AddressOperationModel;
-import com.faizal.ecom.model.ChangePhoneModel;
-import com.faizal.ecom.model.ResponseModel;
-import com.faizal.ecom.model.UpdateUserModel;
+import com.faizal.ecom.model.*;
 import com.faizal.ecom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +49,24 @@ public class UserController {
 
     /*------------Product---------------*/
 
+    @PostMapping("/addproduct")
     public ResponseModel addProduct(@RequestBody Product product){
-        return userService.addProduct();
+        return userService.addProduct(product);
+    }
+
+    @DeleteMapping("/deleteproduct/{id}")
+    public ResponseModel deleteProduct(@PathVariable String id){
+        return userService.deleteProduct(id);
+    }
+
+    /*---------Add To Cart-------------*/
+
+    @PostMapping("/addtocart")
+    public ResponseModel addToCart(@RequestBody AddToCartModel addToCartModel){
+        return userService.addToCart(addToCartModel);
+    }
+    @PostMapping("/addtowishlist")
+    public ResponseModel addToWishList(@RequestBody AddToWishListModel addToWishListModel){
+        return userService.addToList(addToWishListModel);
     }
 }

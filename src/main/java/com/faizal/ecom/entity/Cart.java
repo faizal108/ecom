@@ -40,6 +40,7 @@ public class Cart {
         this.createdDate = Calendar.getInstance(TimeZone.getDefault());
     }
     public Cart(User user, Product product, int quantity){
+        this();
         this.user = user;
         this.product = product;
         this.quantity = quantity;

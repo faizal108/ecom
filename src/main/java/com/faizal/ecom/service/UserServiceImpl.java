@@ -227,8 +227,8 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    /*----------Add To Cart--------------*/
 
+    /*----------Add To Cart--------------*/
     @Override
     public ResponseModel addToCart(AddToCartModel addToCartModel) {
         // get the user by id.
@@ -247,6 +247,15 @@ public class UserServiceImpl implements UserService{
         return CommanUtil.prepareErrorResponse(Message.ADD_FAIL, null);
     }
 
+    @Override
+    public ResponseModel getAllCartItem(String id) {
+        if(userDao.userExistById(id)){
+            List<Cart> cart = cartDao.getAllCartItem(id);
+            return CommanUtil.prepareOkResponse(Message.SUCCESS, cart);
+        }
+        return CommanUtil.prepareErrorResponse(Message.FAIL, null);
+    }
+
     /*------------Add To WishList--------------*/
 
     @Override
@@ -263,5 +272,15 @@ public class UserServiceImpl implements UserService{
         }
         return CommanUtil.prepareErrorResponse(Message.ADD_FAIL, null);
     }
+
+    @Override
+    public ResponseModel deleteWishItem(String id) {
+        if(wishListDao.isExistById(id)){
+            wishListDao.deleteItem(id);
+            return CommanUtil.prepareOkResponse(Message.DELETE_SUCCESS,null);
+        }
+        return CommanUtil.prepareOkResponse(Message.DELETE_FAIL, null);
+    }
+
 
 }

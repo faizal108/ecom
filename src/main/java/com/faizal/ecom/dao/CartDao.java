@@ -5,6 +5,8 @@ import com.faizal.ecom.entity.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CartDao {
 
@@ -13,5 +15,10 @@ public class CartDao {
 
     public void add(Cart cart) {
         cartRepo.save(cart);
+    }
+
+    public List<Cart> getAllCartItem(String id) {
+
+        return cartRepo.findByUser_uid(id);
     }
 }

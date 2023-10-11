@@ -34,5 +34,9 @@ public interface UserService {
 
     ResponseModel addToCart(AddToCartModel addToCartModel);
 
+    ResponseModel getAllCartItem(String id);
+
     ResponseModel addToList(AddToWishListModel addToWishListModel);
+
+    ResponseModel deleteWishItem(String id);
 }

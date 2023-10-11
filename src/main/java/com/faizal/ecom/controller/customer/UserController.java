@@ -65,8 +65,18 @@ public class UserController {
     public ResponseModel addToCart(@RequestBody AddToCartModel addToCartModel){
         return userService.addToCart(addToCartModel);
     }
+
+    @GetMapping("/getallcartitem/{id}")
+    public ResponseModel getAllCartItem(@PathVariable String id){
+        return userService.getAllCartItem(id);
+    }
+
     @PostMapping("/addtowishlist")
     public ResponseModel addToWishList(@RequestBody AddToWishListModel addToWishListModel){
         return userService.addToList(addToWishListModel);
+    }
+    @DeleteMapping("deletewishitem/{id}")
+    public ResponseModel deleteWishItem(@PathVariable String id){
+        return userService.deleteWishItem(id);
     }
 }

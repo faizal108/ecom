@@ -22,7 +22,7 @@ public class Cart {
     private String cid;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+        @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
@@ -30,6 +30,8 @@ public class Cart {
     private Product product;
 
     private int quantity;
+
+//    private int amount;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar createdDate;

@@ -15,4 +15,12 @@ public class WishListDao {
     public void addToList(WishList wishList) {
         wishListRepo.save(wishList);
     }
+
+    public boolean isExistById(String id) {
+        return wishListRepo.existsById(id);
+    }
+
+    public void deleteItem(String id) {
+        wishListRepo.deleteById(id);
+    }
 }

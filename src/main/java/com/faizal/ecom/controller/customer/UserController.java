@@ -1,14 +1,18 @@
 package com.faizal.ecom.controller.customer;
 
-import com.faizal.ecom.entity.Cart;
 import com.faizal.ecom.entity.Product;
 import com.faizal.ecom.model.*;
+import com.faizal.ecom.model.address.AddressOperationModel;
+import com.faizal.ecom.model.password.ChangePasswordModel;
+import com.faizal.ecom.model.password.ChangePhoneModel;
+import com.faizal.ecom.model.responce.ResponseModel;
+import com.faizal.ecom.model.user.UpdateUserModel;
 import com.faizal.ecom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/customer/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
     @Autowired
@@ -30,8 +34,10 @@ public class UserController {
         return userService.changePhone(changePhoneModel);
     }
 
-
-
+    @GetMapping("/profile/{id}")
+    public ResponseModel userProfile(@PathVariable String id){
+        return userService.getUserInfo(id);
+    }
     /*--------------Address-------------*/
 
     @PostMapping("/addaddress")
@@ -47,18 +53,12 @@ public class UserController {
         return userService.updateAddress(addressOperationModel);
     }
 
-    /*------------Product---------------*/
+    /*----------Password---------------*/
 
-    @PostMapping("/addproduct")
-    public ResponseModel addProduct(@RequestBody Product product){
-        return userService.addProduct(product);
+    @PutMapping("/changepassword")
+    public ResponseModel changePassword(@RequestBody ChangePasswordModel changePasswordModel){
+        return userService.changePassword(changePasswordModel);
     }
-
-    @DeleteMapping("/deleteproduct/{id}")
-    public ResponseModel deleteProduct(@PathVariable String id){
-        return userService.deleteProduct(id);
-    }
-
     /*---------Add To Cart-------------*/
 
     @PostMapping("/addtocart")

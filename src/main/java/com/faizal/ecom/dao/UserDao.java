@@ -1,8 +1,8 @@
 package com.faizal.ecom.dao;
 
-import com.faizal.ecom.dao.repos.AddressRepo;
-import com.faizal.ecom.dao.repos.PasswordRepo;
-import com.faizal.ecom.dao.repos.UserRepo;
+import com.faizal.ecom.dao.repos.user.AddressRepo;
+import com.faizal.ecom.dao.repos.user.PasswordRepo;
+import com.faizal.ecom.dao.repos.user.UserRepo;
 import com.faizal.ecom.entity.Address;
 import com.faizal.ecom.entity.Password;
 import com.faizal.ecom.entity.Status;

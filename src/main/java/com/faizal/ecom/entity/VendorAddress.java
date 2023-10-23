@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import java.util.UUID;
 
 @Data
@@ -14,15 +15,14 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
-public class Address extends AbstractDomain{
-
+public class VendorAddress extends AbstractDomain{
     @Id
-    private String add_id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_user_id")
+    @OneToOne
+    @JoinColumn(name = "fk_vendor_id")
     @JsonBackReference
-    private User user;
+    private Vendor vendor;
 
     private String country;
     private String state;
@@ -30,17 +30,17 @@ public class Address extends AbstractDomain{
     private int pincode;
     private String street;
 
-    public Address(){
-        this.add_id = UUID.randomUUID().toString();
-        this.setStatus(Status.DEACTIVE);
+    public VendorAddress(){
+        this.id = UUID.randomUUID().toString();
+        this.setStatus(Status.ACTIVE);
     }
-    public Address(AddressModel model, User user) {
+    public VendorAddress(AddressModel model, Vendor vendor) {
         this();
         this.country = model.getCountry();
         this.state = model.getState();
         this.city = model.getCity();
         this.pincode = model.getPincode();
         this.street = model.getStreet();
-        this.user = user;
+        this.vendor = vendor;
     }
 }

@@ -1,4 +1,4 @@
-package com.faizal.ecom.dao.repos;
+package com.faizal.ecom.dao.repos.user;
 
 import com.faizal.ecom.entity.Status;
 import com.faizal.ecom.entity.User;

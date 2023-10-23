@@ -1,4 +1,4 @@
-package com.faizal.ecom.model;
+package com.faizal.ecom.model.password;
 
 import com.faizal.ecom.entity.User;
 import lombok.Data;

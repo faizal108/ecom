@@ -1,4 +1,4 @@
-package com.faizal.ecom.dao.repos;
+package com.faizal.ecom.dao.repos.user;
 
 import com.faizal.ecom.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -6,44 +6,53 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
-
 
 @Data
 @Getter
 @Setter
 @ToString
 @Entity
-public class User extends AbstractDomain {
+public class Vendor extends AbstractDomain{
 
     @Id
-    private String uid;
+    private String vid;
+
     private String firstName;
     private String lastName;
     private String phone;
+
+    @OneToOne(mappedBy = "vendor")
+    @JsonManagedReference
+    private VendorAddress address;
+
+    private String shopName;
+    private String gstNumber;
+    private String businessDescription;
+
     private int verificationOTP;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "vendor")
     @JsonManagedReference
-    private List<Address> address;
+    private List<VendorPassword> password;
 
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<Password> password;
-
-    public User () {
+    public Vendor(){
+        this.vid = UUID.randomUUID().toString();
         this.setCreatedDate(Calendar.getInstance(TimeZone.getDefault()));
-        this.uid = UUID.randomUUID().toString();
         this.setStatus(Status.DEACTIVE);
     }
 
-    public User(String firstName, String lastName, String phone) {
+    public Vendor(String firstName, String lastName, String phone,String shopName,String gstNumber, String businessDescription){
         this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+        this.shopName = shopName;
+        this.gstNumber = gstNumber;
+        this.businessDescription = businessDescription;
     }
 }

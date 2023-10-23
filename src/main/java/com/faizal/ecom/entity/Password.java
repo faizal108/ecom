@@ -1,5 +1,6 @@
 package com.faizal.ecom.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class Password extends AbstractDomain{
 
     @ManyToOne
     @JoinColumn(name = "fk_user_id")
+    @JsonBackReference
     private User user;
 
     public Password(){

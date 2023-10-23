@@ -1,4 +1,4 @@
-package com.faizal.ecom.model;
+package com.faizal.ecom.model.responce;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

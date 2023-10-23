@@ -1,4 +1,4 @@
-package com.faizal.ecom.model;
+package com.faizal.ecom.model.address;
 
 import lombok.Data;
 

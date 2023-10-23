@@ -3,6 +3,15 @@ package com.faizal.ecom.service;
 import com.faizal.ecom.dao.*;
 import com.faizal.ecom.entity.*;
 import com.faizal.ecom.model.*;
+import com.faizal.ecom.model.address.AddressOperationModel;
+import com.faizal.ecom.model.password.ChangePasswordModel;
+import com.faizal.ecom.model.password.ChangePhoneModel;
+import com.faizal.ecom.model.password.ForgotPassModel;
+import com.faizal.ecom.model.responce.ResponseModel;
+import com.faizal.ecom.model.user.UpdateUserModel;
+import com.faizal.ecom.model.user.UserLoginModel;
+import com.faizal.ecom.model.user.UserRegistrationModel;
+import com.faizal.ecom.model.user.UserVerifyOtpModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.faizal.ecom.util.CommanUtil;
@@ -65,6 +74,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public ResponseModel getUserInfo(String id) {
+        User user = userDao.findById(id);
+        user.setPassword(null);
+        if(user != null){
+            return CommanUtil.prepareOkResponse(Message.SUCCESS, user);
+        }
+        return CommanUtil.prepareErrorResponse(Message.FAIL,null);
+    }
+
+    @Override
     public ResponseModel changePhone(ChangePhoneModel changePhoneModel) {
         User user = userDao.findByPhone(changePhoneModel.getOldPhone());
         if(user != null && !Objects.equals(changePhoneModel.getOldPhone(), changePhoneModel.getNewPhone())){
@@ -86,8 +105,8 @@ public class UserServiceImpl implements UserService{
         return CommanUtil.prepareErrorResponse(Message.FAIL,null);
     }
 
-
     /*-------Address Services--------------------*/
+
     @Override
     public ResponseModel addAddress(AddressOperationModel addressOperationModel){
         User user  = userDao.findById(addressOperationModel.getId());
@@ -133,8 +152,8 @@ public class UserServiceImpl implements UserService{
     }
 
 
-
     /*-------Verification and Security---------- */
+
     @Override
     public ResponseModel setOtp(String phone) {
 //        Get generated Otp
@@ -191,7 +210,6 @@ public class UserServiceImpl implements UserService{
             return CommanUtil.prepareErrorResponse(Message.FAIL,null);
         }
     }
-
     @Override
     public ResponseModel loginUser(UserLoginModel userModel) {
         User user =  userDao.findByPhoneAndStatus(userModel.getPhone());
@@ -204,31 +222,16 @@ public class UserServiceImpl implements UserService{
         return CommanUtil.prepareErrorResponse(Message.LOGIN_FAIL,null);
 
     }
+
     private int generateOtp(){
         Random random = new Random();
         return (100000+random.nextInt(900000));
     }
 
-    /*--------------Product---------------*/
-
-    @Override
-    public ResponseModel addProduct(Product product){
-        productDao.addProduct(product);
-        return CommanUtil.prepareOkResponse(Message.SUCCESS, null);
-    }
-
-    @Override
-    public ResponseModel deleteProduct(String id){
-        if(productDao.isExistById(id)){
-            productDao.deleteProduct(id);
-            return CommanUtil.prepareOkResponse(Message.DELETE_SUCCESS,null);
-        }
-        return CommanUtil.prepareOkResponse(Message.DELETE_FAIL, null);
-    }
-
 
 
     /*----------Add To Cart--------------*/
+
     @Override
     public ResponseModel addToCart(AddToCartModel addToCartModel) {
         // get the user by id.

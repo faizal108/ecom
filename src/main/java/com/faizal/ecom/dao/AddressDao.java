@@ -1,6 +1,6 @@
 package com.faizal.ecom.dao;
 
-import com.faizal.ecom.dao.repos.AddressRepo;
+import com.faizal.ecom.dao.repos.user.AddressRepo;
 import com.faizal.ecom.entity.Address;
 import com.faizal.ecom.entity.Status;
 import com.faizal.ecom.entity.User;

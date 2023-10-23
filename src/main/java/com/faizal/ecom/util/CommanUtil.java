@@ -1,6 +1,6 @@
 package com.faizal.ecom.util;
 
-import com.faizal.ecom.model.ResponseModel;
+import com.faizal.ecom.model.responce.ResponseModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 

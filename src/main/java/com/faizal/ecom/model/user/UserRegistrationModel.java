@@ -1,5 +1,6 @@
-package com.faizal.ecom.model;
+package com.faizal.ecom.model.user;
 
+import com.faizal.ecom.model.address.AddressModel;
 import lombok.Data;
 
 @Data

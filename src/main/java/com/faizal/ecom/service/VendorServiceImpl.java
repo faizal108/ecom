@@ -90,7 +90,7 @@ public class VendorServiceImpl implements VendorService{
 
     /*--------------Product----------------*/
 
-    private int threshold = 50;
+    private int threshold = 200;
 
     public int getThreshold() {
         return threshold;
